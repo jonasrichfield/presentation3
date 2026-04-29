@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ou Pa Poukont Ou - Legal Guide</title>
     
-    <!-- Tailwind CSS (Loaded via CDN for zero setup) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Tailwind Custom Configuration -->
@@ -52,16 +52,22 @@
         body.show-en .lang-ht-flex { display: none; }
     </style>
 </head>
-<body class="min-h-screen bg-white font-sans text-black selection:bg-brandOrange selection:text-white pb-20 relative">
+<body class="min-h-screen bg-white font-sans text-black selection:bg-brandOrange selection:text-white pb-10 relative">
 
-    <!-- Language Toggle -->
-    <button onclick="toggleLanguage()" class="absolute top-4 right-4 flex items-center gap-2 bg-black text-white px-3 py-1.5 text-[10px] font-black uppercase tracking-widest hover:bg-brandOrange transition-colors z-50 cursor-pointer border-2 border-black">
-        <i data-lucide="languages" class="w-3 h-3"></i> 
-        <span id="lang-text">ENG</span>
-    </button>
+    <!-- Top Right Controls: Logo and Language Toggle -->
+    <div class="absolute top-4 right-4 flex items-center gap-4 z-50">
+        <!-- Logo -->
+        <img src="https://i.ibb.co/tTpmnrsP/Chat-GPT-Image-Apr-28-2026-11-37-32-PM.png" alt="Jonas Richfield Logo" class="w-12 md:w-16 h-auto object-contain border-2 border-black bg-white p-1 brutal-shadow" style="box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);">
+        
+        <!-- Language Toggle -->
+        <button onclick="toggleLanguage()" class="flex items-center gap-2 bg-black text-white px-3 py-1.5 text-[10px] font-black uppercase tracking-widest hover:bg-brandOrange transition-colors border-2 border-black brutal-shadow" style="box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);">
+            <i data-lucide="languages" class="w-3 h-3"></i> 
+            <span id="lang-text">ENG</span>
+        </button>
+    </div>
 
     <!-- HEADER SECTION -->
-    <header class="max-w-[1200px] mx-auto px-6 pt-20">
+    <header class="max-w-[1200px] mx-auto px-6 pt-24">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end w-full">
             <h1 class="text-[5rem] md:text-[8.5rem] font-black leading-[0.85] tracking-tighter uppercase m-0 p-0">
                 <span class="lang-ht">OU<br/>PA<br/>POUKONT<br/>OU</span>
@@ -114,7 +120,7 @@
                         <span class="lang-en">People living in the US who are being abused (physically or verbally) by a US citizen or Green Card-holding spouse, parent, or child (21+).</span>
                     </p>
                 </div>
-                <div class="mb-10 flex-grow">
+                <div class="mb-8 flex-grow">
                     <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Sa ou bezwen genyen:</span><span class="lang-en">Basic requirements:</span>
                     </h4>
@@ -125,6 +131,17 @@
                         <li class="flex gap-3 text-[14px] font-bold text-gray-800 leading-snug items-start"><span class="text-brandOrange font-black mt-[-2px]">—</span> <span class="lang-ht">Ou dwe se yon moun ki gen bon karaktè.</span><span class="lang-en">You must be a person of good moral character.</span></li>
                     </ul>
                 </div>
+                
+                <!-- Video Embed -->
+                <div class="mb-8">
+                    <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
+                        <span class="lang-ht">Gade Videyo Saa:</span><span class="lang-en">Watch This Video:</span>
+                    </h4>
+                    <div class="w-full aspect-video border-[3px] border-black bg-black relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/Ebm3KmkCu1Y" title="VAWA Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
                 <div class="bg-[#1a1a1a] text-white p-6 border-l-[6px] border-brandOrange">
                     <h4 class="text-[10px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Egzanp reyèl:</span><span class="lang-en">Real Example:</span>
@@ -154,7 +171,7 @@
                         <span class="lang-en">People who have been victims of a serious crime in the US (like rape, armed assault, or kidnapping) and suffered as a result.</span>
                     </p>
                 </div>
-                <div class="mb-10 flex-grow">
+                <div class="mb-8 flex-grow">
                     <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Sa ou bezwen genyen:</span><span class="lang-en">Basic requirements:</span>
                     </h4>
@@ -165,6 +182,17 @@
                         <li class="flex gap-3 text-[14px] font-bold text-gray-800 leading-snug items-start"><span class="text-brandOrange font-black mt-[-2px]">—</span> <span class="lang-ht">Otorite yo dwe siyen yon sètifika ki di ou te ede yo.</span><span class="lang-en">Authorities must sign a certificate confirming your cooperation.</span></li>
                     </ul>
                 </div>
+
+                <!-- Video Embed -->
+                <div class="mb-8">
+                    <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
+                        <span class="lang-ht">Gade Videyo Saa:</span><span class="lang-en">Watch This Video:</span>
+                    </h4>
+                    <div class="w-full aspect-video border-[3px] border-black bg-black relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/HYekf690W7g" title="U-Visa Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
                 <div class="bg-[#1a1a1a] text-white p-6 border-l-[6px] border-brandOrange">
                     <h4 class="text-[10px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Egzanp reyèl:</span><span class="lang-en">Real Example:</span>
@@ -194,7 +222,7 @@
                         <span class="lang-en">People forced, defrauded (tricked/lied to), or coerced into working or performing commercial sex acts against their will.</span>
                     </p>
                 </div>
-                <div class="mb-10 flex-grow">
+                <div class="mb-8 flex-grow">
                     <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Sa ou bezwen genyen:</span><span class="lang-en">Basic requirements:</span>
                     </h4>
@@ -205,6 +233,17 @@
                         <li class="flex gap-3 text-[14px] font-bold text-gray-800 leading-snug items-start"><span class="text-brandOrange font-black mt-[-2px]">—</span> <span class="lang-ht">Si yo depòte w, sa t ap yon gwo tray pou ou.</span><span class="lang-en">Deportation would cause extreme hardship for you.</span></li>
                     </ul>
                 </div>
+
+                <!-- Video Embed -->
+                <div class="mb-8">
+                    <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
+                        <span class="lang-ht">Gade Videyo Saa:</span><span class="lang-en">Watch This Video:</span>
+                    </h4>
+                    <div class="w-full aspect-video border-[3px] border-black bg-black relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/Qagd7H0z3ng" title="T-Visa Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
                 <div class="bg-[#1a1a1a] text-white p-6 border-l-[6px] border-brandOrange">
                     <h4 class="text-[10px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Egzanp reyèl:</span><span class="lang-en">Real Example:</span>
@@ -234,7 +273,7 @@
                         <span class="lang-en">People who fear for their lives or persecution in their home country due to race, religion, nationality, political opinion, or membership in a specific group.</span>
                     </p>
                 </div>
-                <div class="mb-10 flex-grow">
+                <div class="mb-8 flex-grow">
                     <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Sa ou bezwen genyen:</span><span class="lang-en">Basic requirements:</span>
                     </h4>
@@ -244,6 +283,17 @@
                         <li class="flex gap-3 text-[14px] font-bold text-gray-800 leading-snug items-start"><span class="text-brandOrange font-black mt-[-2px]">—</span> <span class="lang-ht">Pèsekisyon an dwe fèt pa gouvènman an oswa moun gouvènman an pa ka kontwole.</span><span class="lang-en">Persecution must be by the government or forces they cannot control.</span></li>
                     </ul>
                 </div>
+
+                <!-- Video Embed -->
+                <div class="mb-8">
+                    <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
+                        <span class="lang-ht">Gade Videyo Saa:</span><span class="lang-en">Watch This Video:</span>
+                    </h4>
+                    <div class="w-full aspect-video border-[3px] border-black bg-black relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/FzGPYjSKOmE" title="Asylum Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
                 <div class="bg-[#1a1a1a] text-white p-6 border-l-[6px] border-brandOrange">
                     <h4 class="text-[10px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Egzanp reyèl:</span><span class="lang-en">Real Example:</span>
@@ -273,7 +323,7 @@
                         <span class="lang-en">People with documented relatives. Green Card holders can only petition for spouses and unmarried children. US Citizens can also petition for parents, married children, and siblings.</span>
                     </p>
                 </div>
-                <div class="mb-10 flex-grow">
+                <div class="mb-8 flex-grow">
                     <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Sa ou bezwen genyen:</span><span class="lang-en">Basic requirements:</span>
                     </h4>
@@ -283,6 +333,17 @@
                         <li class="flex gap-3 text-[14px] font-bold text-gray-800 leading-snug items-start"><span class="text-brandOrange font-black mt-[-2px]">—</span> <span class="lang-ht">Fason ou te antre Ozetazini an ka afekte pwosesis la.</span><span class="lang-en">How you entered the US may affect where and how you process your application.</span></li>
                     </ul>
                 </div>
+
+                <!-- Video Embed -->
+                <div class="mb-8">
+                    <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
+                        <span class="lang-ht">Gade Videyo Saa:</span><span class="lang-en">Watch This Video:</span>
+                    </h4>
+                    <div class="w-full aspect-video border-[3px] border-black bg-black relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/zMUTDACtSbo" title="Family Petition Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
                 <div class="bg-[#1a1a1a] text-white p-6 border-l-[6px] border-brandOrange">
                     <h4 class="text-[10px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Egzanp reyèl:</span><span class="lang-en">Real Example:</span>
@@ -312,7 +373,7 @@
                         <span class="lang-en">Children or young adults under 21 (18 in some states) who cannot live with one or both parents due to abuse, neglect, or abandonment.</span>
                     </p>
                 </div>
-                <div class="mb-10 flex-grow">
+                <div class="mb-8 flex-grow">
                     <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Sa ou bezwen genyen:</span><span class="lang-en">Basic requirements:</span>
                     </h4>
@@ -323,6 +384,17 @@
                         <li class="flex gap-3 text-[14px] font-bold text-gray-800 leading-snug items-start"><span class="text-brandOrange font-black mt-[-2px]">—</span> <span class="lang-ht">Ou pa dwe marye.</span><span class="lang-en">You must be unmarried.</span></li>
                     </ul>
                 </div>
+
+                <!-- Video Embed -->
+                <div class="mb-8">
+                    <h4 class="text-[11px] font-black tracking-widest uppercase mb-3 text-brandOrange">
+                        <span class="lang-ht">Gade Videyo Saa:</span><span class="lang-en">Watch This Video:</span>
+                    </h4>
+                    <div class="w-full aspect-video border-[3px] border-black bg-black relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/Y1gfd7XWV8g" title="SIJS Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
                 <div class="bg-[#1a1a1a] text-white p-6 border-l-[6px] border-brandOrange">
                     <h4 class="text-[10px] font-black tracking-widest uppercase mb-3 text-brandOrange">
                         <span class="lang-ht">Egzanp reyèl:</span><span class="lang-en">Real Example:</span>
@@ -375,15 +447,57 @@
                     <span class="lang-ht">JWENN ÈD LEGAL JODIA</span>
                     <span class="lang-en">GET LEGAL HELP TODAY</span>
                 </a>
-
-                <div class="mt-16 p-4 bg-black/10 border-l-[4px] border-white/40">
-                    <p class="text-white/80 text-[13px] font-medium italic">
-                        <span class="lang-ht">Remak: Enfòmasyon ki sou sit entènèt sa a se pou edikasyon jeneral sèlman epi li pa yon konsèy legal.</span>
-                        <span class="lang-en">Disclaimer: Information on this website is for general education only and does not constitute legal advice.</span>
-                    </p>
-                </div>
             </div>
         </section>
+        
+        <!-- COMPREHENSIVE LEGAL DISCLAIMER FOOTER -->
+        <footer class="mt-16 border-[3px] border-black p-6 bg-gray-50 text-xs md:text-sm font-medium text-gray-700 leading-relaxed brutal-shadow">
+            <div class="flex items-center gap-2 mb-4">
+                <i data-lucide="scale" class="w-5 h-5 text-brandOrange"></i>
+                <h4 class="font-black uppercase tracking-widest text-black">
+                    <span class="lang-ht">Avi Legal Ak Dwa Otè</span>
+                    <span class="lang-en">Legal Disclaimer & Copyright Notice</span>
+                </h4>
+            </div>
+            
+            <p class="mb-3 text-black font-bold">
+                <span class="lang-ht">&copy; 2026 Jonas Richfield. Pibliye nan dat 4/28/2026.</span>
+                <span class="lang-en">&copy; 2026 Jonas Richfield. Published on 4/28/2026.</span>
+            </p>
+            
+            <p class="mb-3">
+                <span class="lang-ht">
+                    <strong>Enfòmasyon inivèsèl, Pa yon konsèy legal:</strong> Tout sa ou li sou sitwèb sa a se enfòmasyon inivèsèl pou edikasyon sèlman. Enfòmasyon sa yo pa fèt pou bay yon solisyon legal pou dosye pèsonèl ou. 
+                </span>
+                <span class="lang-en">
+                    <strong>Universal Information, Not Legal Advice:</strong> All information provided on this website is universal information intended for educational purposes only. It does not constitute formal legal advice tailored to your personal case.
+                </span>
+            </p>
+            
+            <p class="mb-3">
+                <span class="lang-ht">
+                    <strong>Kalifikasyon:</strong> Jonas Richfield pa yon avoka ki gen lisans, men pito yon Asistan Legal ki gen anpil eksperyans nan zafè imigrasyon. Itilize sitwèb sa a pa fòme okenn relasyon avoka-kliyan (Attorney-Client Relationship).
+                </span>
+                <span class="lang-en">
+                    <strong>Qualifications:</strong> Jonas Richfield is not a licensed attorney. He is a Legal Assistant with extensive professional experience in immigration law. Your use of this website does not create an Attorney-Client Relationship.
+                </span>
+            </p>
+
+            <p class="mb-3">
+                <span class="lang-ht">
+                    <strong>Lwa k ap Chanje:</strong> Piske lwa ak politik imigrasyon yo mare ak politik gouvènman an, yo ka chanje nenpòt lè epi yo ka vin pa aji (dated) apre yon sèten tan. Ou sèvi ak enfòmasyon sa yo sou pwòp responsablite w. Pi bon solisyon an se toujou pale fas-a-fas ak yon avoka imigrasyon ki kalifye oswa yon reprezantan DOJ ki akredite.
+                </span>
+                <span class="lang-en">
+                    <strong>Changing Laws:</strong> Because immigration laws are heavily tied to politics, the information on this site can change rapidly and become dated over time. You consume this content at your own risk. The best and safest course of action is always to speak directly to a licensed immigration attorney or a DOJ-accredited legal representative regarding your unique circumstances.
+                </span>
+            </p>
+
+            <p class="italic text-gray-500 text-[10px] md:text-xs border-t border-gray-300 pt-3 mt-3">
+                <span class="lang-ht">Yo pa gen dwa separe, kopye, oswa itilize kontni ki sou sit sa a pou lòt rezon san konsantman ekri Jonas Richfield.</span>
+                <span class="lang-en">This content cannot be distributed, copied, or reproduced without explicit written consent from Jonas Richfield.</span>
+            </p>
+        </footer>
+
     </main>
 
     <!-- Language Toggle Script -->
