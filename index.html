@@ -1,0 +1,375 @@
+/*
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState } from 'react';
+import { PhoneCall, Languages } from 'lucide-react';
+
+// Data strictly follows the corrected legal parameters established previously.
+const protections = [
+  {
+    id: 'vawa',
+    number: '01',
+    title: 'VAWA',
+    tagColor: 'bg-[#ffe6e6]', // Light pink
+    label: { 
+      ht: 'Proteksyon pou moun ki viktim abi nan men fanmi yo',
+      en: 'Protection for survivors of domestic abuse by family members'
+    },
+    who: {
+      ht: 'Moun k ap viv Ozetazini ki gen yon mari, yon madanm, yon paran, oubyen yon pitit (ki gen 21 an oswa plis) k ap maltrete yo fizikman oswa nan mo, epi ki se Sitwayen Ameriken oswa ki gen rezidans.',
+      en: 'People living in the US who are being abused (physically or verbally) by a US citizen or Green Card-holding spouse, parent, or child (21+).'
+    },
+    requirements: {
+      ht: [
+        'Ou dwe gen relasyon fanmi ki kalifye ak moun k ap maltrete w la.',
+        'Ou dwe te viv avèk moun sa a.',
+        'Moun nan maltrete w (ou PA bezwen rapò lapolis pou pwouve sa).',
+        'Ou dwe se yon moun ki gen bon karaktè.'
+      ],
+      en: [
+        'You must have a qualifying family relationship with the abuser.',
+        'You must have lived with this person.',
+        'The person abused you (you do NOT need a police report to prove this).',
+        'You must be a person of good moral character.'
+      ]
+    },
+    example: {
+      ht: 'Mari Marie se yon rezidan Ameriken. Li toujou ap bat li epi li di li si li rele lapolis, y ap depòte l. Marie ka aplike pou VAWA san mari l pa konnen pou li ka jwenn pwòp papye pa li.',
+      en: "Marie's husband is a US resident. He constantly beats her and says if she calls the police, she will be deported. Marie can apply for VAWA without his knowledge to get her own status."
+    }
+  },
+  {
+    id: 'u-visa',
+    number: '02',
+    title: 'U-VISA',
+    tagColor: 'bg-[#e6f3ff]', // Light blue
+    label: {
+      ht: 'Proteksyon pou moun ki viktim krim grav epi ki ede lapolis',
+      en: 'Protection for survivors of serious crimes who help the police'
+    },
+    who: {
+      ht: 'Moun ki te viktim yon krim grav Ozetazini (tankou vyòl, atak ak zam, oswa kidnapin) epi ki te soufri anpil poutèt sa.',
+      en: 'People who have been victims of a serious crime in the US (like rape, armed assault, or kidnapping) and suffered as a result.'
+    },
+    requirements: {
+      ht: [
+        'Ou te viktim yon krim grav.',
+        'Ou gen enfòmasyon sou krim nan.',
+        'Ou te ede otorite yo (lapolis, pwokirè, jij, elatriye).',
+        'Otorite yo dwe siyen yon sètifika ki di ou te ede yo.'
+      ],
+      en: [
+        'You were a victim of a serious crime.',
+        'You have information about the crime.',
+        'You helped authorities (police, prosecutors, judges, etc.).',
+        'Authorities must sign a certificate confirming your cooperation.'
+      ]
+    },
+    example: {
+      ht: 'Jean te viktim yon vòl ak zam kote yo te blese l. Li te rele lapolis epi li te ede yo jwenn kriminèl yo. Jean ka aplike pou yon U-Visa pou l ka rete Ozetazini.',
+      en: 'Jean was a victim of an armed robbery where he was injured. He called the police and helped them catch the criminals. Jean can apply for a U-Visa to stay in the US.'
+    }
+  },
+  {
+    id: 't-visa',
+    number: '03',
+    title: 'T-VISA',
+    tagColor: 'bg-[#e6ffe6]', // Light green
+    label: {
+      ht: 'Proteksyon pou moun yo fòse travay (Trafik moun)',
+      en: 'Protection for survivors of human trafficking (forced labor)'
+    },
+    who: {
+      ht: 'Moun yo te fòse, twonpe (kote yo te ba ou manti), oswa menase pou yo fè yo travay oswa fè bagay seksyèl san yo pa vle.',
+      en: 'People forced, defrauded (tricked/lied to), or coerced into working or performing commercial sex acts against their will.'
+    },
+    requirements: {
+      ht: [
+        'Ou se yon viktim trafik moun grav.',
+        'Ou isit Ozetazini poutèt trafik sa a.',
+        'Si w gen 18 an oswa plis, ou dwe ede otorite yo (sòf si w twò twomatize pou w fè sa).',
+        'Si yo depòte w, sa t ap yon gwo tray pou ou.'
+      ],
+      en: [
+        'You are a victim of severe human trafficking.',
+        'You are in the US because of this trafficking.',
+        'If 18+, you must help authorities (UNLESS you are too traumatized to do so).',
+        'Deportation would cause extreme hardship for you.'
+      ]
+    },
+    example: {
+      ht: 'Yon moun te di Sarah l ap ba li yon bon djòb Ozetazini. Lè l rive, yo pran paspò l, yo fè l travay 15 èdtan pa jou san peye l, epi yo menase pou yo fè l mal. Sarah ka aplike pou yon T-Visa.',
+      en: 'Someone told Sarah they had a good job for her in the US. When she arrived, they took her passport and forced her to work 15 hours a day without pay. Sarah can apply for a T-Visa.'
+    }
+  },
+  {
+    id: 'asylum',
+    number: '04',
+    title: 'ASYLUM',
+    tagColor: 'bg-[#ffffe6]', // Light yellow
+    label: {
+      ht: 'Proteksyon pou moun ki pè retounen nan peyi yo',
+      en: 'Protection for those who fear returning to their home country'
+    },
+    who: {
+      ht: 'Moun ki pè pou yo pa pèdi lavi yo oswa pou yo pa pèsekite yo nan peyi yo poutèt ras yo, relijyon yo, nasyonalite yo, opinyon politik yo, oswa paske yo fè pati yon gwoup espesifik.',
+      en: 'People who fear for their lives or persecution in their home country due to race, religion, nationality, political opinion, or membership in a specific group.'
+    },
+    requirements: {
+      ht: [
+        'Ou dwe montre ou gen yon krentif reyèl pou w retounen nan peyi w.',
+        'Ou dwe aplike nan mwens pase yon ane depi ou rive Ozetazini (nan pifò ka).',
+        'Pèsekisyon an dwe fèt pa gouvènman an oswa moun gouvènman an pa ka kontwole.'
+      ],
+      en: [
+        'You must demonstrate a well-founded fear of returning to your country.',
+        'You must apply within one year of arrival in the US (in most cases).',
+        'Persecution must be by the government or forces they cannot control.'
+      ]
+    },
+    example: {
+      ht: 'Lavi Pierre an danje an Ayiti paske li se yon jounalis ki te denonse move bagay k ap pase. Li te oblije sove paske kriminèl t ap chache li. Pierre ka aplike pou Azil.',
+      en: "Pierre's life is in danger in Haiti because he is a journalist who exposed corruption. He had to flee because gangs were hunting him. Pierre can apply for Asylum."
+    }
+  },
+  {
+    id: 'family-petition',
+    number: '05',
+    title: 'FAMILY PETITION',
+    tagColor: 'bg-[#f3e6ff]', // Light purple
+    label: {
+      ht: 'Petisyon Fanmi (mari/madanm/pitit/paran)',
+      en: 'Family Petition (spouse/children/parents)'
+    },
+    who: {
+      ht: 'Moun ki gen fanmi ki gen papye. Moun ki gen Green Card ka aplike sèlman pou mari/madanm ak pitit ki poko marye. Sitwayen Ameriken ka aplike tou pou paran yo, pitit ki marye, ak frè oswa sè yo.',
+      en: 'People with documented relatives. Green Card holders can only petition for spouses and unmarried children. US Citizens can also petition for parents, married children, and siblings.'
+    },
+    requirements: {
+      ht: [
+        'Ou dwe gen yon relasyon fanmi lwa a aksepte.',
+        'Fanmi an dwe siyen yon papye ki montre li ka pran swen w finansyèman (Sponsorship).',
+        'Fason ou te antre Ozetazini an ka afekte pwosesis la.'
+      ],
+      en: [
+        'You must have a qualifying family relationship.',
+        'Your relative must file a petition and agree to financially sponsor you.',
+        'How you entered the US may affect where and how you process your application.'
+      ]
+    },
+    example: {
+      ht: 'Madanm Paul se yon Sitwayen Ameriken. Li ka fè yon aplikasyon pou Paul pou Paul ka jwenn rezidans pa li. Sa pèmèt Paul rete ak travay san kè sote.',
+      en: "Paul's wife is a US Citizen. She can sponsor him for a Green Card, allowing him to stay and work legally without fear."
+    }
+  },
+  {
+    id: 'sijs',
+    number: '06',
+    title: 'SIJS',
+    tagColor: 'bg-[#ffebe6]', // Light orange
+    label: {
+      ht: 'Pwoteksyon pou timoun ak jèn',
+      en: 'Protection for children and youth'
+    },
+    who: {
+      ht: 'Timoun oswa jèn ki gen mwens pase 21 an (nan kèk leta se 18 an) ki pa gen paran pou okipe yo paske paran yo te abandone yo, maltrete yo, oswa neglije yo.',
+      en: 'Children or young adults under 21 (18 in some states) who cannot live with one or both parents due to abuse, neglect, or abandonment.'
+    },
+    requirements: {
+      ht: [
+        'Ou dwe yon timoun oswa yon jèn.',
+        'Ou dwe isit Ozetazini kounye a.',
+        'Yon jij dwe bay yon lòd ki montre sitiyasyon fanmi w.',
+        'Ou pa dwe marye.'
+      ],
+      en: [
+        'You must be a child or youth.',
+        'You must currently be in the US.',
+        'A state court must find you were abandoned/abused/neglected.',
+        'You must be unmarried.'
+      ]
+    },
+    example: {
+      ht: 'Tico rive Ozetazini pou kont li paske manman l te mouri epi papa l te abandone l. Yon jij fanmi rekonèt sa, sa ki pèmèt Tico aplike pou SIJS pou l ka jwenn rezidans.',
+      en: 'Tico arrived alone because his parents were unable to care for him. A judge recognized his situation, allowing him to apply for SIJS and obtain legal residency.'
+    }
+  }
+];
+
+export default function App() {
+  const [lang, setLang] = useState('ht');
+  const toggleLang = () => setLang(prev => prev === 'ht' ? 'en' : 'ht');
+
+  // Exact brand colors matched from mockups
+  const brandOrange = '#DF4F33'; 
+  const ctaBgColor = '#CD462A';
+
+  return (
+    <div className="min-h-screen bg-white font-sans text-black selection:bg-[#DF4F33] selection:text-white pb-20 relative">
+      
+      {/* Language Toggle */}
+      <button 
+        onClick={toggleLang}
+        className="absolute top-4 right-4 flex items-center gap-2 bg-black text-white px-3 py-1.5 text-[10px] font-black uppercase tracking-widest hover:bg-[#DF4F33] transition-colors z-50 cursor-pointer"
+      >
+        <Languages size={12} /> {lang === 'ht' ? 'ENG' : 'HT'}
+      </button>
+
+      {/* HEADER SECTION */}
+      <header className="max-w-[1200px] mx-auto px-6 pt-20">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end w-full">
+          <h1 className="text-[5rem] md:text-[8.5rem] font-black leading-[0.85] tracking-tighter uppercase m-0 p-0">
+            OU<br/>PA<br/>POUKONT<br/>OU
+          </h1>
+          <div className="mt-8 md:mt-0 text-left md:text-right max-w-[300px]">
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-1">
+              Èd pou kominote ayisyen an
+            </p>
+            <p className="text-[15px] font-medium leading-tight">
+              Aprann kijan pou w jwenn pwoteksyon pèmanan Ozetazini ak konfyans.
+            </p>
+          </div>
+        </div>
+
+        <p className="text-2xl md:text-3xl font-bold italic mt-6" style={{ color: brandOrange }}>
+          {lang === 'ht' ? 'Ou gen dwa, menm si ou pa gen papye.' : 'You have rights, even if you are undocumented.'}
+        </p>
+
+        <hr className="border-t-[3px] border-black my-8" />
+
+        <p className="text-lg md:text-xl font-medium text-gray-700 max-w-3xl mb-16 leading-relaxed">
+          {lang === 'ht' 
+            ? 'Nou konnen bagay yo pa fasil, men gen espwa. Ozetazini, gen lwa ki la pou pwoteje moun ki nan sitiyasyon difisil. Scroll pou wè opsyon ki egziste pou ou.' 
+            : 'We know things are not easy, but there is hope. In the US, there are laws to protect people in difficult situations. Scroll to see your options.'}
+        </p>
+      </header>
+
+      {/* CARDS GRID */}
+      <main className="max-w-[1200px] mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 mb-24">
+          {protections.map((p) => (
+            <div 
+              key={p.id} 
+              className="bg-white border-[3px] border-black p-8 flex flex-col relative"
+              style={{ boxShadow: '8px 8px 0px 0px rgba(0,0,0,1)' }}
+            >
+              {/* Card Header Tag */}
+              <div className="self-start border-[3px] border-black mb-6 flex items-center">
+                <span className={`px-4 py-1 text-3xl font-black ${p.tagColor}`}>
+                  {p.number}. {p.title}
+                </span>
+              </div>
+
+              {/* Title / Description */}
+              <h3 className="text-[1.35rem] font-bold leading-snug mb-8">
+                {p.label[lang]}
+              </h3>
+
+              {/* Who Qualifies */}
+              <div className="mb-8">
+                <h4 className="text-[11px] font-black tracking-widest uppercase mb-3" style={{ color: brandOrange }}>
+                  {lang === 'ht' ? 'Ki moun ki mèt li?' : 'Who qualifies?'}
+                </h4>
+                <p className="text-[15px] font-medium leading-relaxed text-gray-900">
+                  {p.who[lang]}
+                </p>
+              </div>
+
+              {/* Requirements List */}
+              <div className="mb-10 flex-grow">
+                <h4 className="text-[11px] font-black tracking-widest uppercase mb-3" style={{ color: brandOrange }}>
+                  {lang === 'ht' ? 'Sa ou bezwen genyen:' : 'Basic requirements:'}
+                </h4>
+                <ul className="space-y-3">
+                  {p.requirements[lang].map((req, i) => (
+                    <li key={i} className="flex gap-3 text-[14px] font-bold text-gray-800 leading-snug items-start">
+                      <span style={{ color: brandOrange }} className="font-black mt-[-2px]">—</span> 
+                      <span>{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Real Example Box */}
+              <div className="bg-[#1a1a1a] text-white p-6 border-l-[6px]" style={{ borderColor: brandOrange }}>
+                <h4 className="text-[10px] font-black tracking-widest uppercase mb-3" style={{ color: brandOrange }}>
+                  {lang === 'ht' ? 'Egzanp reyèl:' : 'Real Example:'}
+                </h4>
+                <p className="text-[14px] italic font-bold leading-relaxed opacity-90">
+                  "{p.example[lang]}"
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA SECTION (Matches Image 3 perfectly) */}
+        <section 
+          className="relative p-10 md:p-16 border-[3px] border-black text-white overflow-hidden"
+          style={{ backgroundColor: ctaBgColor, boxShadow: '10px 10px 0px 0px rgba(0,0,0,1)' }}
+        >
+          {/* Faded background exclamation point */}
+          <div className="absolute top-4 right-10 text-[20rem] font-black text-black opacity-10 leading-none select-none pointer-events-none">
+            !
+          </div>
+
+          <div className="relative z-10">
+            {/* CTA Pre-title Badge */}
+            <div className="inline-block bg-black text-white px-4 py-1.5 text-[11px] font-bold tracking-widest uppercase border-[2px] border-white mb-8">
+              {lang === 'ht' ? 'Pwoteje avni w: Konprann opsyon ki pi long yo.' : 'Protect your future: Understand long-term options.'}
+            </div>
+
+            {/* Giant CTA Headline */}
+            <h2 className="text-[4rem] md:text-[6.5rem] font-black uppercase tracking-tighter leading-[0.9] mb-8 max-w-[95%]">
+              {lang === 'ht' ? 'TPS SE TANPORÈ, MEN AVNI W PA OBLIJE TANPORÈ.' : 'TPS IS TEMPORARY, BUT YOUR FUTURE DOES NOT HAVE TO BE.'}
+            </h2>
+
+            {/* CTA Body Paragraphs */}
+            <div className="max-w-[850px]">
+              <p className="text-[22px] md:text-[26px] font-bold leading-snug mb-8">
+                {lang === 'ht' 
+                  ? 'TPS bay yon soulajman pou yon ti tan, men politik imigrasyon yo ka chanje nenpòt lè. Chèche konnen lòt chemen legal kounye a ka ede w pran bon desizyon pou w bati yon lavi ki pi solid Ozetazini.' 
+                  : 'TPS provides short-term relief, but immigration policies can change anytime. Exploring other legal pathways now can help you make good decisions to build a more solid life in the US.'}
+              </p>
+
+              {/* White highlight block */}
+              <div className="inline-block bg-white text-black px-3 py-1 font-black text-[18px] md:text-[22px] uppercase mb-6 tracking-tight">
+                {lang === 'ht' ? 'KONNEN DWAT OU ANVAN OU DESIDE KITE PEYI A.' : 'KNOW YOUR RIGHTS BEFORE YOU DECIDE TO LEAVE.'}
+              </div>
+
+              <p className="text-[22px] md:text-[26px] font-bold leading-snug mb-12">
+                {lang === 'ht'
+                  ? 'Pran kontak ak yon avoka imigrasyon oswa yon reprezantan DOJ ki akredite pou gade sitiyasyon w. Pa tann pou w konprann opsyon w yo.'
+                  : 'Contact an immigration attorney or a DOJ accredited representative to look at your situation. Don\'t wait to understand your options.'}
+              </p>
+            </div>
+
+            {/* Call Button */}
+            <a 
+              href="https://www.dropbox.com/scl/fi/36owcpwmd2m0vlhmz3lis/AFSC-Private-Attorney-Referral-Sheet.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-4 bg-transparent border-[3px] border-black text-black px-8 py-4 text-[22px] md:text-[28px] font-black uppercase hover:bg-black/5 transition-colors"
+              style={{ boxShadow: '6px 6px 0px 0px rgba(0,0,0,1)' }}
+            >
+              <PhoneCall size={32} strokeWidth={3} /> 
+              {lang === 'ht' ? 'JWENN ÈD LEGAL JODIA' : 'GET LEGAL HELP TODAY'}
+            </a>
+
+            {/* Disclaimer Bar */}
+            <div className="mt-16 p-4 bg-black/10 border-l-[4px] border-white/40">
+              <p className="text-white/80 text-[13px] font-medium italic">
+                {lang === 'ht'
+                  ? 'Remak: Enfòmasyon ki sou sit entènèt sa a se pou edikasyon jeneral sèlman epi li pa yon konsèy legal.'
+                  : 'Disclaimer: Information on this website is for general education only and does not constitute legal advice.'}
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+    </div>
+  );
+}
